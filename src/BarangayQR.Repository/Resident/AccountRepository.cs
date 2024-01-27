@@ -2,11 +2,12 @@
 using BarangayQR.BarangayQR.Core.Extensions;
 using BarangayQR.Core.Dapper;
 using BarangayQR.Repository.Contract.Entities.Resident;
+using BarangayQR.Repository.Contract.Resident;
 using Dapper;
 
 namespace BarangayQR.Repository.Resident
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly IDapperConnection _connection;
         public AccountRepository(IDapperConnection connection)

@@ -1,11 +1,12 @@
 ﻿
 using AutoMapper;
+using BarangayQR.Business.Resident;
 using BarangayQR.Domain.Models.Resident;
 using BarangayQR.Repository.Contract.Resident;
 
 namespace BarangayQR.Services.Resident
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;

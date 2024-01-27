@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BarangayQR.Business\BarangayQR.Business.csproj" />
     <ProjectReference Include="..\BarangayQR.Domain\BarangayQR.Domain.csproj" />
     <ProjectReference Include="..\BarangayQR.Repository.Contract\BarangayQR.Repository.Contract.csproj" />
   </ItemGroup>

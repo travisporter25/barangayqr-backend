@@ -57,7 +57,9 @@ builder.Services.AddAutoMapper(typeof(DtoToDtoToDomainMapping));
 
 
 builder.Services.AddTransient<IDapperConnection, AppDatabaseConnection>()
-                .AddTransient<IAccountRepository, AccountRepository>();
+                .AddTransient<IAccountRepository, AccountRepository>()
+                .AddTransient<IAddressRepository, AddressRepository>()
+                .AddTransient<ICredentialRepository, CredentialRepository>();
 #endregion
 
 //if (builder.Environment.IsDevelopment())

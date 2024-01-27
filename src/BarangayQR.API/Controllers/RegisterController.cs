@@ -17,6 +17,8 @@ namespace BarangayQR.API.Controllers
     public class RegisterController : ClientControllerBase
     {
         private readonly IAccountService _accountService;
+        private readonly IAddressService _addressService;
+        private readonly ICredentialService _credentialService;
         private readonly IMapper _mapper;
         private readonly AppSettings _settings;
         public RegisterController
@@ -35,7 +37,29 @@ namespace BarangayQR.API.Controllers
         public async Task<IActionResult> SaveAccountDetails(AccountDto data)
         {
             var mappedData = _mapper.Map<AccountDomain>(data);
-            var response = _accountService.SaveDetails(mappedData);
+            var response = await _accountService.SaveDetails(mappedData);
+            return Ok(new
+            {
+                Data = response,
+                Success = true
+            });
+        }
+        [HttpPost("address")]
+        public async Task<IActionResult> SaveAddressDetails(AccountDto data)
+        {
+            var mappedData = _mapper.Map<AccountDomain>(data);
+            var response = await _addressService.SaveDetails(mappedData);
+            return Ok(new
+            {
+                Data = response,
+                Success = true
+            });
+        }
+        [HttpPost("credential")]
+        public async Task<IActionResult> SaveCredentialDetails(AccountDto data)
+        {
+            var mappedData = _mapper.Map<AccountDomain>(data);
+            var response = await _credentialService.SaveDetails(mappedData);
             return Ok(new
             {
                 Data = response,
