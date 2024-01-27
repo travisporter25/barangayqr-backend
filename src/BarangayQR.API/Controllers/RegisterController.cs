@@ -36,6 +36,7 @@ namespace BarangayQR.API.Controllers
         {
             var mappedData = _mapper.Map<AccountDomain>(data);
             var response = _accountService.SaveDetails(mappedData);
+
             return Ok(new
             {
                 Data = response,
