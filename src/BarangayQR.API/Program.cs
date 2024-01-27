@@ -5,6 +5,10 @@ using Azure.Identity;
 using Microsoft.Extensions.Configuration;
 using BarangayQR.APIAPI.OptionSetup;
 using BarangayQR.API.OptionSetup;
+using BarangayQR.Core.Dapper;
+using BarangayQR.API.Mappings;
+using BarangayQR.Repository.Contract.Resident;
+using BarangayQR.Repository.Resident;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,7 +53,11 @@ builder.Services.AddAuthorization();
 
 #region Services
 
-builder.Services.AddTransient<IDapperConnection, Appdatabaseconnection>();
+builder.Services.AddAutoMapper(typeof(DtoToDtoToDomainMapping));
+
+
+builder.Services.AddTransient<IDapperConnection, AppDatabaseConnection>()
+                .AddTransient<IAccountRepository, AccountRepository>();
 #endregion
 
 //if (builder.Environment.IsDevelopment())

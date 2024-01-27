@@ -4,9 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>950178bc-7f80-40ab-af1c-42fb4c2fb759</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.3.0" />
     <PackageReference Include="Azure.Extensions.AspNetCore.DataProtection.Keys" Version="1.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
@@ -17,11 +19,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BarangayQR.BlobStorage\BarangayQR.BlobStorage.csproj" />
+    <ProjectReference Include="..\BarangayQR.Business\BarangayQR.Business.csproj" />
+    <ProjectReference Include="..\BarangayQR.Core\BarangayQR.Core.csproj" />
+    <ProjectReference Include="..\BarangayQR.Domain\BarangayQR.Domain.csproj" />
+    <ProjectReference Include="..\BarangayQR.Repository.Contract\BarangayQR.Repository.Contract.csproj" />
+    <ProjectReference Include="..\BarangayQR.Repository\BarangayQR.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Mappings\" />
+    <Folder Include="Mappings\Converters\" />
   </ItemGroup>
 
 </Project>

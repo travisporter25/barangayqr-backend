@@ -32,8 +32,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{17E38AF0-EAAF-42A2-A54B-056D17247C36}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8A332CD6-EFAA-4AB5-ACC8-41CA432DD553}"
+	ProjectSection(SolutionItems) = preProject
+		BarangayQR.API\ClientControllerBase.cs = BarangayQR.API\ClientControllerBase.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Factory", "Factory", "{5989E3DC-DD9D-4948-9DA2-5412B9CE460F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OAuth", "OAuth", "{604BE23F-06A1-4E35-A010-F4779D4F5AD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,29 +1,25 @@
 ﻿
-using BarangayQR.Core;
-using Microsoft.Extensions.Options;
-using Dapper;
-using BarangayQR.Core.Dapper;
 using BarangayQR.BarangayQR.Core.Extensions;
-using System.Reflection.Metadata;
-using BarangayQR.BarangayQR.Core;
+using BarangayQR.Core.Dapper;
+using BarangayQR.Repository.Contract.Entities.Resident;
+using Dapper;
 
-namespace BarangayQR.Repository
+namespace BarangayQR.Repository.Resident
 {
-    public class AdminRepository<T> where T : class
+    public class AccountRepository
     {
-        private readonly AppSettings _settings;
         private readonly IDapperConnection _connection;
-        public AdminRepository(IOptions<AppSettings> settings)
+        public AccountRepository(IDapperConnection connection)
         {
-            _settings = settings.Value;
+            _connection = connection;
         }
 
-        public async Task<List<T>> Get(object parameter)
+        public async Task<AccountEntity> SaveDetails(object parameter)
         {
             using (var db = _connection.DatabaseReader.TryOpen())
             {
                 string query = string.Empty;
-                var accountExist = db.Query<T>(@"SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId", parameter).Any() ? true : false;
+                var accountExist = db.Query<AccountEntity>(@"SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId", parameter).Any() ? true : false;
                 if (!accountExist)
                 {
                     query = @"INSERT INTO ( ClientId, BranchId, AddressType, Barangay, Street, City, Region, Province, ZipCode,
@@ -47,12 +43,11 @@ namespace BarangayQR.Repository
                               AddressType = @AddressType
                               WHERE ClientId = @ClientId AND BranchId = @BranchId
                             
-                              SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId"
-                    ;
+                              SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
                 }
 
-                var result = await db.QueryAsync<T>(query, parameter);
-                return result.ToList();
+                var result = await db.QueryFirstOrDefaultAsync<AccountEntity>(query, parameter);
+                return result;
             }
         }
     }

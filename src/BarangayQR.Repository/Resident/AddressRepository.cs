@@ -1,11 +1,13 @@
 ﻿
 using BarangayQR.BarangayQR.Core.Extensions;
 using BarangayQR.Core.Dapper;
-using BarangayQR.Repository.Contract;
+using BarangayQR.Repository.Contract.Entities.Resident;
+using BarangayQR.Repository.Contract.Resident;
+using Dapper;
 
 namespace BarangayQR.Repository.Resident
 {
-    public class AddressRepository
+    public class AddressRepository : IAddressRepository
     {
         private readonly IDapperConnection _connection;
         public AddressRepository(IDapperConnection connection)
@@ -17,7 +19,36 @@ namespace BarangayQR.Repository.Resident
         {
             using (var db = _connection.DatabaseReader.TryOpen())
             {
-                var query = @"INSERT INTO (@)";
+                string query = string.Empty;
+                var accountExist = db.Query<AddressEntity>(@"SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId", parameter).Any() ? true : false;
+                if (!accountExist)
+                {
+                    query = @"INSERT INTO ( ClientId, BranchId, AddressType, Barangay, Street, City, Region, Province, ZipCode,
+                                          ContactName, ContactNumber ) VALUES
+                                          ( @ClientId, @BranchId, @AddressType, @Barangay, @Street, @City, @Region, @Province, @ZipCode,
+                                            @ContactName, @ContactNumber )
+                              SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
+                }
+                else
+                {
+                    query = @"UPDATE dbo.Account 
+                              SET 
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType,
+                              AddressType = @AddressType
+                              WHERE ClientId = @ClientId AND BranchId = @BranchId
+                            
+                              SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
+                }
+
+                var result = await db.QueryFirstOrDefaultAsync<AddressEntity>(query, parameter);
+                return result;
             }
         }
     }

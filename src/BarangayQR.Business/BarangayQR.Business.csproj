@@ -22,4 +22,8 @@
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BarangayQR.Domain\BarangayQR.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
