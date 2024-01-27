@@ -23,9 +23,9 @@ namespace BarangayQR.Repository.Resident
                 var accountExist = db.Query<AddressEntity>(@"SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId", parameter).Any() ? true : false;
                 if (!accountExist)
                 {
-                    query = @"INSERT INTO ( ClientId, BranchId, AddressType, Barangay, Street, City, Region, Province, ZipCode,
+                    query = @"INSERT INTO ( ClientId, BranchId, AddressID, AddressType, Barangay, Street, City, Region, Province, ZipCode,
                                           ContactName, ContactNumber ) VALUES
-                                          ( @ClientId, @BranchId, @AddressType, @Barangay, @Street, @City, @Region, @Province, @ZipCode,
+                                          ( @ClientId, @BranchId, @AddressID, @AddressType, @Barangay, @Street, @City, @Region, @Province, @ZipCode,
                                             @ContactName, @ContactNumber )
                               SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
                 }
@@ -33,15 +33,16 @@ namespace BarangayQR.Repository.Resident
                 {
                     query = @"UPDATE dbo.Account 
                               SET 
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType
+                              AddressID = @AddressID,
+                              AddressType = BarangayAddressType,
+                              Barangay = @Street,
+                              Street = @Street,
+                              City = @City,
+                              Region = @Region,
+                              Province = @Province,
+                              ZipCode = @ZipCode,
+                              ContactName = @ContactName,
+                              ContactNumber = @ContactNumber
                               WHERE ClientId = @ClientId AND BranchId = @BranchId
                             
                               SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";

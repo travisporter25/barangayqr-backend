@@ -23,25 +23,27 @@ namespace BarangayQR.Repository.Resident
                 var accountExist = db.Query<AccountEntity>(@"SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId", parameter).Any() ? true : false;
                 if (!accountExist)
                 {
-                    query = @"INSERT INTO ( ClientId, BranchId, AddressType, Barangay, Street, City, Region, Province, ZipCode,
-                                          ContactName, ContactNumber ) VALUES
-                                          ( @ClientId, @BranchId, @AddressType, @Barangay, @Street, @City, @Region, @Province, @ZipCode,
-                                            @ContactName, @ContactNumber )
+                    query = @"INSERT INTO ( ClientId, BranchId, AccountId, FirstName, MiddleName, LastName, Suffix, NickName, Email,
+                                          Mobile, Gender, CivilStatus, BirthDate ) VALUES
+                                          ( @ClientId, @BranchId, @AccountId, @FirstName, @MiddleName, @LastName, @Suffix, @NickName, @Email,
+                                            @Mobile, @Gender, @CivilStatus, @BirthDate )
                               SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
                 }
                 else
                 {
                     query = @"UPDATE dbo.Account 
                               SET 
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType
+                              AccountId = @AccountId,
+                              FirstName = @FirstName,
+                              MiddleName = @MiddleName,
+                              LastName = @LastName,
+                              Suffix = @Suffix,
+                              NickName = @NickName,
+                              Email = @Email,
+                              Mobile = @Mobile,
+                              Gender = @Gender,
+                              CivilStatus = @CivilStatus,
+                              BirthDate = @BirthDate
                               WHERE ClientId = @ClientId AND BranchId = @BranchId
                             
                               SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";

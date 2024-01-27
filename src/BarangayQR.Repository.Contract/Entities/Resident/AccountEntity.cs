@@ -2,13 +2,15 @@
 
 public class AccountEntity : EntityBase
 {
-    public string AddressType { get; set; }
-    public string Barangay { get; set; }
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string Region { get; set; }
-    public string Province { get; set; }
-    public string ZipCode { get; set; }
-    public string ContactName { get; set; }
-    public string ContactNumber { get; set; }
+    public Guid AccountId { get; set; }
+    public string FirstName { get; set; }
+    public string MiddleName { get; set; }
+    public string LastName { get; set; }
+    public string? Suffix { get; set; }
+    public string? NickName { get; set; }
+    public string Email { get; set; }
+    public string Mobile { get; set; }
+    public string Gender { get; set; }
+    public string CivilStatus { get; set; }
+    public DateTime? BirthDate { get; set; }
 }

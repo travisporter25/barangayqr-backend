@@ -21,25 +21,23 @@ namespace BarangayQR.Repository.Resident
                 var accountExist = db.Query<CredentialEntity>(@"SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId", parameter).Any() ? true : false;
                 if (!accountExist)
                 {
-                    query = @"INSERT INTO ( ClientId, BranchId, AddressType, Barangay, Street, City, Region, Province, ZipCode,
-                                          ContactName, ContactNumber ) VALUES
-                                          ( @ClientId, @BranchId, @AddressType, @Barangay, @Street, @City, @Region, @Province, @ZipCode,
-                                            @ContactName, @ContactNumber )
+                    query = @"INSERT INTO ( CredentialID, CredentialNumber, CredentialName, Description, CredentialType, CredentialTypeName, FileName, Url, CredentialData ) VALUES
+                                          ( @CredentialID, @CredentialNumber, @CredentialName, @Description, @CredentialType, @CredentialTypeName, @FileName, @Url, @CredentialData )
                               SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
                 }
                 else
                 {
                     query = @"UPDATE dbo.Account 
                               SET 
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType,
-                              AddressType = @AddressType
+                              CredentialID = @CredentialID,
+                              CredentialNumber = @CredentialNumber,
+                              CredentialName = @CredentialName,
+                              Description = @Description,
+                              CredentialType = @CredentialType,
+                              CredentialTypeName = @CredentialTypeName,
+                              FileName = @FileName,
+                              Url = @Url,
+                              CredentialData = @CredentialData
                               WHERE ClientId = @ClientId AND BranchId = @BranchId
                             
                               SELECT * FROM dbo.Account WHERE ClientId = @ClientId AND BranchId = @BranchId";
