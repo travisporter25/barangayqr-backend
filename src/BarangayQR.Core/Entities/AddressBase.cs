@@ -9,7 +9,7 @@ public class AddressBase : EntitiesBase
     public long? AddressID { get; set; }
     public int? AddressType { get; set; }
     public string? AddressTypeName { get; set; }
-    public string? Region { get; set; }
+    public string? Region { get; set; } 
     public string? Province { get; set; }
     public string? City { get; set; }
     public string? Barangay { get; set; }
