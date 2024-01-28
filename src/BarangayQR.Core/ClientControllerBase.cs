@@ -21,5 +21,13 @@ namespace BarangayQR.Core
                 return retVal;
             }
         }
+        public Guid UserId
+        {
+            get
+            {
+                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "userId").Value.EnsureGuid();
+                return retVal;
+            }
+        }
     }
 }

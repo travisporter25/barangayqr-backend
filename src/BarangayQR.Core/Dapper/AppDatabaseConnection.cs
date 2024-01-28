@@ -23,7 +23,7 @@ namespace BarangayQR.Core.Dapper
         {
             get
             {
-                return new NpgsqlConnection(_databaseConnectionString);
+                return new SqlConnection(_databaseConnectionString);
             }
         }
     }

@@ -3,7 +3,7 @@ using BarangayQR.Domain.Models.ValueObject;
 
 namespace BarangayQR.Domain.Models.Resident
 {
-    public class CredentialsDomain : ResidentBase
+    public class CredentialsDomain : BaseDomainModel
     {
         public Guid CredentialID { get; set; }
         public string? CredentialNumber { get; set; }

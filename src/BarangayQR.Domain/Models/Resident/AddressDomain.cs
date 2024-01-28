@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace BarangayQR.Domain.Models.Resident;
 
-public class AddressDomain : ResidentBase
+public class AddressDomain : BaseDomainModel
 {
     public Guid AddressID { get; set; }
     public int? AddressType { get; set; }

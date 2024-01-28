@@ -2,7 +2,7 @@
 
 namespace BarangayQR.Domain.Models.Resident
 {
-    public class AccountDomain : ResidentBase
+    public class AccountDomain : BaseDomainModel
     {
         public Guid AccountId { get; set; }
         public string FirstName { get; set; }
