@@ -1,5 +1,5 @@
-﻿namespace BlobStorage.Entities;
+﻿//namespace BlobStorage.Entities;
 
-public class QueueConfig : Core.Entities.ConfigBase
-{
-}
+//public class QueueConfig : Core.Entities.ConfigBase
+//{
+//}

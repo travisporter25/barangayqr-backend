@@ -36,7 +36,16 @@ namespace BarangayQR.API.Controllers
         [HttpPost("account")]
         public async Task<IActionResult> SaveAccountDetails(AccountDto data)
         {
-            var mappedData = _mapper.Map<AccountDomain>(data);
+            var mappedData = _mapper.Map<AccountDomain>(data, opt =>
+            {
+                opt.AfterMap((s, d) =>
+                {
+                    d.BranchId = BranchId;
+                    d.ClientId = ClientId;
+                });
+
+            });
+
             var response = await _accountService.SaveDetails(mappedData);
             return Ok(new
             {
@@ -45,9 +54,18 @@ namespace BarangayQR.API.Controllers
             });
         }
         [HttpPost("address")]
-        public async Task<IActionResult> SaveAddressDetails(AccountDto data)
+        public async Task<IActionResult> SaveAddressDetails(AddressDto data)
         {
-            var mappedData = _mapper.Map<AccountDomain>(data);
+            var mappedData = _mapper.Map<AddressDomain>(data, opt =>
+            {
+                opt.AfterMap((s, d) =>
+                {
+                    d.BranchId = BranchId;
+                    d.ClientId = ClientId;
+                });
+
+            });
+
             var response = await _addressService.SaveDetails(mappedData);
             return Ok(new
             {
@@ -56,9 +74,18 @@ namespace BarangayQR.API.Controllers
             });
         }
         [HttpPost("credential")]
-        public async Task<IActionResult> SaveCredentialDetails(AccountDto data)
+        public async Task<IActionResult> SaveCredentialDetails(CredentialDto data)
         {
-            var mappedData = _mapper.Map<AccountDomain>(data);
+            var mappedData = _mapper.Map<CredentialsDomain>(data, opt =>
+            {
+                opt.AfterMap((s, d) =>
+                {
+                    d.BranchId = BranchId;
+                    d.ClientId = ClientId;
+                });
+
+            });
+
             var response = await _credentialService.SaveDetails(mappedData);
             return Ok(new
             {

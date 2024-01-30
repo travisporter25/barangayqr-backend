@@ -9,6 +9,8 @@ namespace BarangayQR.API.Mappings
         public DtoToDtoToDomainMapping()
         {
             CreateMap<AccountDto, AccountDomain>().ReverseMap();
+            CreateMap<AddressDto, AddressDomain>().ReverseMap();
+            CreateMap<CredentialDto, CredentialsDomain>().ReverseMap();
         }
     }
 }

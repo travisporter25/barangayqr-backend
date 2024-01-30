@@ -5,6 +5,6 @@ namespace BarangayQR.Business.Resident
 {
     public interface IAddressService
     {
-        Task<AddressDomain> SaveDetails(AccountDomain data);
+        Task<AddressDomain> SaveDetails(AddressDomain data);
     }
 }

@@ -14,7 +14,7 @@ namespace BarangayQR.Services.Resident
             _mapper = mapper;
             _addressRepository = addressRepository;
         }
-        public async Task<AddressDomain> SaveDetails(AccountDomain data)
+        public async Task<AddressDomain> SaveDetails(AddressDomain data)
         {
             var result = await _addressRepository.SaveDetails(data);
             var mappedData = _mapper.Map<AddressDomain>(result);

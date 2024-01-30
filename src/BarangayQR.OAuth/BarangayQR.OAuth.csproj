@@ -18,4 +18,8 @@
     <ProjectReference Include="..\BarangayQR.Domain\BarangayQR.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
