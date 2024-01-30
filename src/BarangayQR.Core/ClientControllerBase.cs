@@ -1,5 +1,6 @@
 ﻿using BarangayQR.Core.Helper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System.Security.Claims;
 namespace BarangayQR.Core
 {
@@ -9,7 +10,7 @@ namespace BarangayQR.Core
         {
             get
             {
-                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "branchId").Value.EnsureGuid();
+                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.ToArray()[0].Value.EnsureGuid();
                 return retVal;
             }
         }
@@ -17,7 +18,7 @@ namespace BarangayQR.Core
         {
             get
             {
-                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "clientId").Value.EnsureGuid();
+                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.ToArray()[1].Value.EnsureGuid();
                 return retVal;
             }
         }
@@ -25,7 +26,7 @@ namespace BarangayQR.Core
         {
             get
             {
-                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "userId").Value.EnsureGuid();
+                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.ToArray()[2].Value.EnsureGuid();
                 return retVal;
             }
         }

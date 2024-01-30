@@ -4,6 +4,14 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var config = builder.Configuration;
+
+if (builder.Environment.IsDevelopment())
+{
+    config.AddUserSecrets<Program>();
+}
+
+builder.Services.AddOptions();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,7 +27,7 @@ builder.Services.AddSwaggerGen(x =>
     {
         In = ParameterLocation.Header,
         Description = "Please insert token",
-        Name = "OAuthorization",
+        Name = "Authorization",
         Type = SecuritySchemeType.Http,
         BearerFormat = "OpenIddict",
         Scheme = "bearer"
@@ -49,12 +57,14 @@ builder.Services.AddAuthentication()
                 {
                     options.ProviderType = typeof(AuthorizationProvider);
                     options.AllowInsecureHttp = true;
-                    options.TokenEndpointPath = new PathString("/oauth/token");
+                    options.TokenEndpointPath = new PathString("/auth/token");
+                    options.TokenEndpointPath = "/auth/token";
                     options.AccessTokenLifetime = TimeSpan.FromDays(30);
                     options.UseSlidingExpiration = true;
                 });
 
 builder.Services.AddScoped<AuthorizationProvider>();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -66,6 +76,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

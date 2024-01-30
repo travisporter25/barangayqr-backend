@@ -13,6 +13,7 @@ using BarangayQR.API.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.OpenApi.Models;
 using AspNet.Security.OAuth.Validation;
+using BarangayQR.BarangayQR.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,8 @@ if (builder.Environment.IsDevelopment())
 //          .AddEnvironmentVariables();
 //}
 
-
+builder.Services.AddOptions();
+builder.Services.Configure<AppSettings>(config.GetSection("BarangayQR"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x =>
@@ -41,7 +43,7 @@ builder.Services.AddSwaggerGen(x =>
     {
         In = ParameterLocation.Header,
         Description = "Please insert token",
-        Name = "OAuthorization",
+        Name = "Authorization",
         Type = SecuritySchemeType.Http,
         BearerFormat = "OpenIddict",
         Scheme = "bearer"
@@ -82,10 +84,10 @@ builder.Services.AddSwaggerGen(x =>
 
 //builder.Services.ConfigureOptions<JWTSettingsOptionSetup>();
 
-builder.Services.AddAuthorization();
-
 builder.Services.AddAuthentication(OAuthValidationDefaults.AuthenticationScheme)
                 .AddOAuthValidation();
+
+builder.Services.AddAuthorization();
 
 
 #region Services
@@ -106,6 +108,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseCors(x =>
@@ -118,9 +121,8 @@ app.UseCors(x =>
 });
 
 app.UseHttpsRedirection();
-
-app.UseAuthentication();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
