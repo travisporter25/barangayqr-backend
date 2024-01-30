@@ -41,10 +41,27 @@ namespace BarangayQR.OAuth.OAuthorization
             }
             else
             {
-                string grantType = context.Request.GetParameter("grant_type").Value.ToString().ToLower();
+                string grantType = context.Request.GetParameter("username").Value.ToString().ToLower();
                 string userName = null;
                 string password = null;
             }
+
+            if (!context.Request.HasParameter("password"))
+            {
+                context.Reject(
+                    error: OpenIdConnectConstants.Errors.InvalidRequest,
+                    description: "Username parameter is missing"
+                );
+                return Task.FromResult(0);
+            }
+            else
+            {
+                string grantType = context.Request.GetParameter("password").Value.ToString().ToLower();
+                string userName = null;
+                string password = null;
+            }
+
+
         }
         public override Task HandleTokenRequest(HandleTokenRequestContext context)
         {

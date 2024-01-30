@@ -9,6 +9,7 @@ using BarangayQR.Core.Dapper;
 using BarangayQR.API.Mappings;
 using BarangayQR.Repository.Contract.Resident;
 using BarangayQR.Repository.Resident;
+using BarangayQR.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,14 +53,7 @@ builder.Services.AddAuthorization();
 
 
 #region Services
-
-builder.Services.AddAutoMapper(typeof(DtoToDtoToDomainMapping));
-
-
-builder.Services.AddTransient<IDapperConnection, AppDatabaseConnection>()
-                .AddTransient<IAccountRepository, AccountRepository>()
-                .AddTransient<IAddressRepository, AddressRepository>()
-                .AddTransient<ICredentialRepository, CredentialRepository>();
+builder.Services.ConfigureDependencies();
 #endregion
 
 //if (builder.Environment.IsDevelopment())

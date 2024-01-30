@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Factory", "Factory", "{5989
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OAuth", "OAuth", "{604BE23F-06A1-4E35-A010-F4779D4F5AD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarangayQR.OAuth", "BarangayQR.OAuth\BarangayQR.OAuth.csproj", "{B1259C26-276D-4640-9F6F-08F03F318583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarangayQR.OAuth", "BarangayQR.OAuth\BarangayQR.OAuth.csproj", "{B1259C26-276D-4640-9F6F-08F03F318583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
