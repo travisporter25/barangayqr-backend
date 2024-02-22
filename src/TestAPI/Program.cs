@@ -1,21 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Azure.Identity;
-using Microsoft.Extensions.Configuration;
-using BarangayQR.APIAPI.OptionSetup;
-using BarangayQR.API.OptionSetup;
-using BarangayQR.Core.Dapper;
-using BarangayQR.API.Mappings;
-using BarangayQR.Repository.Contract.Resident;
-using BarangayQR.Repository.Resident;
-using BarangayQR.API.Extensions;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.OpenApi.Models;
 using AspNet.Security.OAuth.Validation;
 using BarangayQR.BarangayQR.Core;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.DataProtection.Repositories;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +22,6 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddOptions();
 builder.Services.Configure<AppSettings>(config.GetSection("BarangayQR"));
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(x =>
 {
@@ -94,7 +78,6 @@ builder.Services.AddAuthorization();
 
 
 #region Services
-builder.Services.ConfigureDependencies();
 #endregion
 
 //if (builder.Environment.IsDevelopment())
@@ -103,11 +86,7 @@ builder.Services.ConfigureDependencies();
 //    builder.Services.ConfigureOptions<SwaggerGenOptionSetup>();
 //}
 
-var sp = builder.Services.BuildServiceProvider();
-
-builder.Services.AddDataProtection()
-                .SetApplicationName("b@rAngay_qr")
-                .AddKeyManagementOptions(o => o.XmlRepository = sp.GetService<IXmlRepository>());
+builder.Services.BuildServiceProvider();
 
 var app = builder.Build();
 

@@ -1,5 +1,9 @@
+using AspNet.Security.OAuth.Validation;
 using BarangayQR.OAuth.OAuthorization;
 using BarangayQR.OAuth.SwaggerCustomUI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,20 +55,29 @@ builder.Services.AddSwaggerGen(x =>
     });
 });
 
-builder.Services.AddAuthentication()
-                .AddOAuthValidation("Bearer")
+builder.Services.AddAuthentication(options => 
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddOAuthValidation()
                 .AddOpenIdConnectServer(options =>
                 {
                     options.ProviderType = typeof(AuthorizationProvider);
                     options.AllowInsecureHttp = true;
                     options.TokenEndpointPath = new PathString("/auth/token");
                     options.TokenEndpointPath = "/auth/token";
-                    options.AccessTokenLifetime = TimeSpan.FromDays(30);
+                    options.AccessTokenLifetime = TimeSpan.FromDays(7);
                     options.UseSlidingExpiration = true;
                 });
 
 builder.Services.AddScoped<AuthorizationProvider>();
 builder.Services.AddAuthorization();
+var sp = builder.Services.BuildServiceProvider();
+
+builder.Services.AddDataProtection()
+                .SetApplicationName("b@rAngay_qr")
+                .AddKeyManagementOptions(o => o.XmlRepository = sp.GetService<IXmlRepository>());
 
 var app = builder.Build();
 
@@ -74,6 +87,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(x =>
+{
+    x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials();
+});
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

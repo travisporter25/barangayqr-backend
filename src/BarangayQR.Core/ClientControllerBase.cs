@@ -10,7 +10,7 @@ namespace BarangayQR.Core
         {
             get
             {
-                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.ToArray()[0].Value.EnsureGuid();
+                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "branchId").Value.EnsureGuid();
                 return retVal;
             }
         }
@@ -26,7 +26,7 @@ namespace BarangayQR.Core
         {
             get
             {
-                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.ToArray()[2].Value.EnsureGuid();
+                Guid retVal = ((ClaimsIdentity)User.Identity).Claims.ToArray()[0].Value.EnsureGuid();
                 return retVal;
             }
         }

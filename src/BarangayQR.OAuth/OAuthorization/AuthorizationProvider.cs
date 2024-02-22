@@ -77,8 +77,7 @@ namespace BarangayQR.OAuth.OAuthorization
             };
                 var identity = new ClaimsIdentity("ASOSOAuth");
                 identity.AddClaim(OpenIdConnectConstants.Claims.Subject, user.UserId.ToString());
-                identity.AddClaim(OpenIdConnectConstants.Claims.Subject, user.BranchId.ToString(), OpenIdConnectConstants.Destinations.AccessToken);
-                identity.AddClaim(OpenIdConnectConstants.Claims.Subject, user.ClientId.ToString());
+                identity.AddClaim("branchId", user.BranchId.ToString(), OpenIdConnectConstants.Destinations.AccessToken);
 
                 var ticket = new AuthenticationTicket(new ClaimsPrincipal(identity), new AuthenticationProperties(), "ASOSOAuth");
                 context.Validate(ticket);
